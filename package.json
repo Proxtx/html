@@ -1,5 +1,5 @@
 {
-  "name": "html",
+  "name": "@proxtx/html",
   "version": "1.0.0",
   "description": "html parser",
   "main": "parser.js",
