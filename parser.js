@@ -36,7 +36,7 @@ const loop = (utility) => {
   const resultArray = [];
   for (let i in utility.charArray) {
     let result = step(utility);
-    resultArray.push(result);
+    if (result) resultArray.push((utility.prevElem = result));
     try {
       utility.next();
     } catch (e) {
@@ -88,6 +88,7 @@ const parsers = {
     if (!utility.char.char.match(regExpLib.htmlStart) || utility.char.escaped)
       return;
     let obj = { type: "html" };
+    utility.prevElem = obj;
     utility.next();
     let tag = utility.char.getString().match(regExpLib.htmlTag)[0];
     tag = tag.substring(0, tag.length - 1);
@@ -124,7 +125,8 @@ const parsers = {
         !utility.char.escaped
       )
         return true;
-      innerHTML.push(step(utility));
+      let result = step(utility);
+      if (result) innerHTML.push((utility.prevElem = result));
       utility.next();
     });
     obj.innerHTML = innerHTML;
@@ -132,12 +134,17 @@ const parsers = {
     return obj;
   },
   text: (utility) => {
-    return { type: "text", char: utility.char.char };
+    if (utility.prevElem && utility.prevElem.type == "text") {
+      utility.prevElem.text += utility.char.char;
+    } else {
+      return { type: "text", text: utility.char.char };
+    }
   },
 };
 
 const parseAttribute = (utility) => {
   if (!utility.char.char.match(regExpLib.attributeStart)) return;
+  utility.prevElem = undefined;
   let attribute = utility.char.getString().match(regExpLib.attributeType)[0];
   attribute = attribute.substring(0, attribute.length - 1);
   utility.next(attribute.length - 1);
@@ -160,11 +167,16 @@ const parseAttribute = (utility) => {
   let value = [];
   utility.do((utility) => {
     if (utility.char.char.match(regExpLib.attributeValueEnd)) return true;
-    value.push(step(utility, [parsers.html]));
+    let result = step(utility, [parsers.html]);
+    if (result) {
+      value.push(result);
+      utility.prevElem = result;
+    }
     utility.next();
   });
   utility.next();
   obj.value = value;
+  utility.prevElem = undefined;
   return obj;
 };
 
@@ -181,6 +193,7 @@ class Utility {
   charArray;
   char;
   index = 0;
+  prevElem;
 
   constructor(string) {
     this.charArray = genCharArray(string);

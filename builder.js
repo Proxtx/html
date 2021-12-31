@@ -45,7 +45,7 @@ const parsers = {
 const genText = (htmlObj) => {
   let text = "";
   for (let i in htmlObj) {
-    text += htmlObj[i].char;
+    text += htmlObj[i].text;
   }
   return text;
 };
