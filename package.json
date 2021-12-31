@@ -1,6 +1,6 @@
 {
   "name": "@proxtx/html",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "html parser",
   "main": "parser.js",
   "scripts": {

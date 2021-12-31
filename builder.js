@@ -21,7 +21,7 @@ const parsers = {
     let node = document.createElement(utility.elem.tag);
     for (let i in utility.elem.attributes) {
       let attribute = utility.elem.attributes[i];
-      node.setAttribute(attribute.attribute, genText(attribute.value));
+      node.setAttribute(attribute.attribute, attribute.value);
     }
     if (!utility.elem.innerHTML) return node;
     let childNodes = build(utility.elem.innerHTML);
