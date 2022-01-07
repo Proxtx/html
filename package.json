@@ -1,6 +1,6 @@
 {
   "name": "@proxtx/html",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "html parser",
   "main": "parser.js",
   "type": "module",

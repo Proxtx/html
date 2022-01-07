@@ -115,6 +115,7 @@ const parsers = {
     });
     obj.attributes = attributes;
     if (selfClosingTags.includes(tag.toLowerCase())) {
+      obj.selfClosing = true;
       return obj;
     }
     utility.next();
