@@ -1,6 +1,12 @@
-export const stringify = (htmlObj) => {
+/**
+ * Reverts the result of parse back to html code
+ * @warn Escaping is not yet supported.
+ * @param {Array} elementList The result of parse
+ * @returns The result of parse as a String
+ */
+export const stringify = (elementList) => {
   let resultString = "";
-  for (let i of htmlObj) {
+  for (let i of elementList) {
     if (i.type == "text") {
       resultString += i.text;
     }

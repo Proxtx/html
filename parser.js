@@ -28,6 +28,11 @@ const genCharArray = (string) => {
   return charArray;
 };
 
+/**
+ * Parses html source code into arrays strings and objects (json)
+ * @param {String} html html source code
+ * @returns Parsed html code
+ */
 export const parse = (html) => {
   return loop(new Utility(html));
 };

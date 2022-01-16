@@ -1,3 +1,8 @@
+/**
+ * Builds the result of parse into a node
+ * @param {Array} htmlObj The result of parse
+ * @returns A node created with the js dom
+ */
 export const build = (htmlObj) => {
   return loop(new Utility(htmlObj));
 };
