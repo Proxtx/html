@@ -23,6 +23,7 @@ const loop = (utility) => {
 const parsers = {
   html: (utility) => {
     if (utility.elem.type != "html") return;
+    if (utility.elem.tag == "!DOCTYPE") return false;
     let node = document.createElement(utility.elem.tag);
     for (let i in utility.elem.attributes) {
       let attribute = utility.elem.attributes[i];
