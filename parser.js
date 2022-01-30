@@ -181,7 +181,7 @@ const parseAttribute = (utility) => {
     utility.next();
   });
   utility.next();
-  obj.value = value[0].text;
+  obj.value = value[0] ? value[0].text : "";
   utility.prevElem = undefined;
   return obj;
 };
