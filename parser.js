@@ -172,7 +172,11 @@ const parseAttribute = (utility) => {
   utility.waitUntil(regExpLib.attributeValueStart, true, true);
   let value = [];
   utility.do((utility) => {
-    if (utility.char.char.match(regExpLib.attributeValueEnd)) return true;
+    if (
+      utility.char.char.match(regExpLib.attributeValueEnd) &&
+      !utility.char.escaped
+    )
+      return true;
     let result = step(utility, [parsers.html]);
     if (result) {
       value.push(result);
