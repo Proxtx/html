@@ -190,8 +190,9 @@ const parseAttribute = (utility) => {
   return obj;
 };
 
+export const parserOrder = [parsers.html, parsers.text];
+
 const step = (utility, ignore = []) => {
-  let parserOrder = [parsers.html, parsers.text];
   for (let i in parserOrder) {
     if (ignore.includes(parserOrder[i])) continue;
     let result = parserOrder[i](utility);
