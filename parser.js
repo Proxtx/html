@@ -88,7 +88,7 @@ const selfClosingTags = [
   "!doctype",
 ];
 
-const parsers = {
+export const parsers = {
   html: (utility) => {
     if (!utility.char.char.match(regExpLib.htmlStart) || utility.char.escaped)
       return;
