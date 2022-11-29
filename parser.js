@@ -73,7 +73,9 @@ export class Parser {
       tag = tag.substring(0, tag.length - 1);
       if (tag.match(this.regExpLib.htmlCommentStart)) {
         utility.do((utility) => {
-          let find = utility.char.getString().match(regExpLib.htmlCommentEnd);
+          let find = utility.char
+            .getString()
+            .match(this.regExpLib.htmlCommentEnd);
           if (!find) {
             utility.next();
             return;
